@@ -1,4 +1,7 @@
 <project>
+  <path id="build.path">
+    <pathelement location="lib/servlet-api.jar"/>
+  </path>
   <target name="compile"
       description="Compiles Java source and copies other source files to the WAR.">
     <mkdir dir="war/WEB-INF/classes" />
@@ -9,6 +12,7 @@
     </copy>
     <javac
         srcdir="src"
+        classpathref="build.path"
         destdir="war/WEB-INF/classes"
         debug="on" />
   </target>
