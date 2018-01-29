@@ -1,10 +1,10 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <servlet>
-        <servlet-name>TestHandler</servlet-name>
-        <servlet-class>edu.cmu.smartwrap.TestHandler</servlet-class>
+        <servlet-name>Persist</servlet-name>
+        <servlet-class>edu.cmu.smartwrap.Persist</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TestHandler</servlet-name>
-        <url-pattern>/TestHandler</url-pattern>
+        <servlet-name>Persist</servlet-name>
+        <url-pattern>/Persist</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,6 +1,10 @@
 <project>
   <path id="build.path">
     <pathelement location="lib/servlet-api.jar"/>
+    <pathelement location="lib/json.jar"/>
+    <pathelement location="lib/appengine-api.jar"/>
+    <pathelement location="lib/google-cloud-datastore-1.15.0.jar"/>
+    <pathelement location="lib/google-cloud-core-1.15.0.jar"/>
   </path>
   <target name="compile"
       description="Compiles Java source and copies other source files to the WAR.">
