@@ -6,17 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.cloud.datastore.Datastore;
-import com.google.cloud.datastore.DatastoreOptions;
-import com.google.cloud.datastore.Entity;
-import com.google.cloud.datastore.Key;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
 
 @javax.servlet.annotation.WebServlet(urlPatterns={"/Persist"})
 
 public class Persist extends javax.servlet.http.HttpServlet
 {
-  private Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
@@ -27,15 +26,8 @@ public class Persist extends javax.servlet.http.HttpServlet
   {
     try
     {
-      if (request.getParameter("wrapper") == null)
-      {
-        response.sendError(response.SC_BAD_REQUEST);
-        return;
-      }
-
-      org.json.JSONArray wrapper = new org.json.JSONArray(request.getParameter("wrapper"));
-      String wrapperName = request.getParameter("wrappername");
-
+      Entity requestPost = new Entity("Request");
+      //requestPost.setProperty("json", request.getParameter("wrappername"));
     }
     catch(Exception e)
     {

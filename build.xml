@@ -1,10 +1,19 @@
 <project>
   <path id="build.path">
-    <pathelement location="lib/servlet-api.jar"/>
-    <pathelement location="lib/json.jar"/>
-    <pathelement location="lib/appengine-api.jar"/>
-    <pathelement location="lib/google-cloud-datastore-1.15.0.jar"/>
+    <pathelement location="lib/appengine-api-1.0-sdk-1.9.61.jar"/>
+    <pathelement location="lib/appengine-api-labs-1.9.61.jar"/>
+    <pathelement location="lib/appengine-jsr107cache-1.9.61.jar"/>
+    <pathelement location="lib/appengine-remote-api.jar"/>
+    <pathelement location="lib/appengine-tools-api.jar"/>
+    <pathelement location="lib/google-api-client-1.23.0.jar"/>
     <pathelement location="lib/google-cloud-core-1.15.0.jar"/>
+    <pathelement location="lib/google-cloud-core-http-1.15.0.jar"/>
+    <pathelement location="lib/google-cloud-datastore-1.15.0.jar"/>
+    <pathelement location="lib/jsr107cache-1.1.jar"/>
+    <pathelement location="lib/json.jar"/>
+    <pathelement location="lib/libservice.jar"/>
+    <pathelement location="lib/servlet-api-3.1.jar"/>
+    <pathelement location="lib/*"/>
   </path>
   <target name="compile"
       description="Compiles Java source and copies other source files to the WAR.">
