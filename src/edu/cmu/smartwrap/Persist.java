@@ -36,7 +36,7 @@ public class Persist extends javax.servlet.http.HttpServlet
       LocalDateTime rightNow = LocalDateTime.now();
       requestPost.setProperty("when", rightNow.toString());
       
-      requestPost.setProperty("json", request.getRequestURL().toString());
+      requestPost.setProperty("json", request.getParameter("wrapper").toString());
 
       datastore.put(requestPost);
     }
