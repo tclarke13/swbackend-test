@@ -28,8 +28,8 @@ public class Persist extends javax.servlet.http.HttpServlet
     {
       Entity requestPost = new Entity("Request");
       
-      requestPost.setProperty("consent", "Hello World");
-      requestPost.setProperty("json", request);
+      requestPost.setProperty("consent", "test");
+      requestPost.setProperty("json", request.getServletPath());
 
       datastore.put(requestPost);
     }
