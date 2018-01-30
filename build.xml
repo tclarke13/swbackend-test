@@ -1,4 +1,10 @@
 <project>
+  <path id="appcfg">
+    <fileset dir="/Library/appengine-java-sdk-1.9.61/bin">
+      <include name="appcfg.sh"/>       
+    </fileset>
+  </path>
+
   <path id="build.path">
     <pathelement location="lib/appengine-api-1.0-sdk-1.9.61.jar"/>
     <pathelement location="lib/appengine-api-labs-1.9.61.jar"/>
@@ -28,5 +34,12 @@
         classpathref="build.path"
         destdir="war/WEB-INF/classes"
         debug="on" />
+  </target>
+  <target name="deploy" depends="compile"
+          description="Compiles Java source and deploys to google app engine">
+    <exec executable="appcfg.sh">
+      <arg value="update" />
+      <arg value="war" />
+    </exec>
   </target>
 </project>
