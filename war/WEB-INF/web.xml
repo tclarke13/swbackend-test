@@ -7,4 +7,12 @@
         <servlet-name>Persist</servlet-name>
         <url-pattern>/Persist</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RecordMetadata</servlet-name>
+        <servlet-class>edu.cmu.smartwrap.RecordMetadata</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecordMetadata</servlet-name>
+        <url-pattern>/smartwrap/Meta</url-pattern>
+    </servlet-mapping>
 </web-app>

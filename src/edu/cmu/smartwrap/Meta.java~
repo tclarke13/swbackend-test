@@ -1,0 +1,58 @@
+package edu.cmu.smartwrap;
+
+public class RecordMetadata extends javax.servlet.http.HttpServlet {
+  public java.net.URLDecoder decoder = new java.net.URLDecoder();
+
+  public void doGet(javax.servlet.http.HttpServletRequest req,
+                    javax.servlet.http.HttpServletResponse resp) throws java.io.IOException {
+    doPost(req, resp);
+  }
+  public void doPost(javax.servlet.http.HttpServletRequest req,
+                    javax.servlet.http.HttpServletResponse resp) throws java.io.IOException {
+    try {
+      String domxml = req.getParameter("domxml");
+      domxml = decoder.decode(domxml, "UTF-8");
+      org.w3c.dom.Document doc = edu.cmu.smartwrap.util.XmlUtil.parse(domxml);
+      
+      String md5sum = doc.getDocumentElement().getAttribute("md5");
+
+      String dominfo = req.getParameter("dominfo");
+      dominfo = decoder.decode(dominfo, "UTF-8");
+      //System.err.println("DOMINFO: " + dominfo);
+      org.json.JSONArray meta = new org.json.JSONArray(dominfo);
+
+      org.json.JSONObject filemeta = new org.json.JSONObject();
+      filemeta.putOpt("mimetype", "application/json");
+      String filename = String.format("meta_%s.json", md5sum);
+      System.err.println("FILENAME : " + filename);
+      edu.cmu.smartwrap.gaeutil.GaeFile file = edu.cmu.smartwrap.gaeutil.GaeFile.create(filename, filemeta);
+      java.nio.channels.WritableByteChannel writeChannel = file.openWriteChannel();
+      
+      // com.google.appengine.api.files.FileService fileService = 
+      //   com.google.appengine.api.files.FileServiceFactory.getFileService();
+      // com.google.appengine.api.files.AppEngineFile file = 
+      //   fileService.createNewBlobFile("application/json", filename);
+      // boolean lock = true;
+      // com.google.appengine.api.files.FileWriteChannel writeChannel = 
+      //   fileService.openWriteChannel(file, lock);
+
+      java.io.PrintWriter pw = new java.io.PrintWriter(java.nio.channels.Channels.newOutputStream(writeChannel));
+      pw.write(meta.toString(2));
+      pw.close();
+      writeChannel.close();
+
+      com.google.appengine.api.datastore.DatastoreService ds =
+        com.google.appengine.api.datastore.DatastoreServiceFactory.getDatastoreService();
+      
+      com.google.appengine.api.datastore.Entity entity = 
+        new com.google.appengine.api.datastore.Entity("Metadata");
+      
+      entity.setProperty("md5sum", md5sum);
+      entity.setProperty("blobkey", file.getBlobKey());
+      ds.put(entity);
+      
+    } catch (Exception ex) {
+      ex.printStackTrace(System.err);
+    }
+  }
+}
